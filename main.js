@@ -4,6 +4,7 @@ const app = require('app'); // Module to control application life.
 const path = require('path');
 const BrowserWindow = require('browser-window'); // Module to create native browser window.
 
+require('electron-debug')();
 // Report crashes to our server.
 require('crash-reporter').start();
 
@@ -24,11 +25,12 @@ app.on('window-all-closed', function() {
 // initialization and is ready to create browser windows.
 app.on('ready', function() {
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 800, height: 600});
+  mainWindow = new BrowserWindow({width: 1024, height: 768});
 
   // and load the index.html of the app.
   if (process.env.NODE_ENV === 'development') {
     mainWindow.loadURL('file://' + path.join(__dirname, 'src/html/dev.html'));
+    mainWindow.openDevTools();
   } else {
     mainWindow.loadURL('file://' + path.join(__dirname, 'src/html/prod.html'));
   }

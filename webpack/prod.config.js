@@ -1,12 +1,13 @@
 import merge from 'lodash/object/merge';
 import webpack from 'webpack';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
-import * as config from './config';
+import webpackTargetElectronRenderer from 'webpack-target-electron-renderer';
+import * as baseConfig from './config';
 
-export default merge({}, config, {
+const config = merge({}, baseConfig, {
   devtool: 'source-map',
   module: {
-    loaders: config.module.loaders.concat([
+    loaders: baseConfig.module.loaders.concat([
       {
         test: /\.jsx?$/,
         loaders: ['babel'],
@@ -18,14 +19,17 @@ export default merge({}, config, {
       }
     ])
   },
-  plugins: config.plugins.concat([
-    new ExtractTextPlugin('[name].css', {
-      allChunks: true
-    }),
+  plugins: baseConfig.plugins.concat([
+    new ExtractTextPlugin('[name].css'),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
+        screw_ie8: true,
         warnings: false
       }
     })
   ])
 });
+
+config.target = webpackTargetElectronRenderer(config);
+
+export default config;

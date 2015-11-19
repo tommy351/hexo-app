@@ -25,15 +25,19 @@
   "author": "Tommy Chen <tommy351@gmail.com> (http://zespia.tw)",
   "license": "MIT",
   "dependencies": {
+    "electron-debug": "^0.5.0",
     "graceful-fs": "^4.1.2",
     "history": "^1.13.1",
     "lodash": "^3.10.1",
+    "normalize.css": "^3.0.3",
     "react": "^0.14.3",
     "react-dom": "^0.14.3",
     "react-redux": "^4.0.0",
     "react-router": "^1.0.0",
     "redux": "^3.0.4",
+    "redux-form": "^3.0.10",
     "redux-promise": "^0.5.0",
+    "redux-simple-router": "0.0.8",
     "redux-thunk": "^1.0.0"
   },
   "devDependencies": {
@@ -68,7 +72,7 @@
     "url-loader": "^0.5.6",
     "webpack": "^1.12.2",
     "webpack-dev-middleware": "^1.2.0",
-    "webpack-dev-server": "^1.12.1",
-    "webpack-hot-middleware": "^2.4.1"
+    "webpack-hot-middleware": "^2.4.1",
+    "webpack-target-electron-renderer": "^0.1.1"
   }
 }

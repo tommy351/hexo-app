@@ -12,11 +12,10 @@ export default {
     ]
   },
   resolve: {
-    extensions: ['', '.js', '.jsx', '.json']
+    extensions: ['', '.js', '.jsx', '.json'],
+    packageMains: ['webpack', 'browser', 'web', 'browserify', ['jam', 'main'], 'main']
   },
-  target: 'node',
   output: {
-    library: true,
     libraryTarget: 'commonjs2',
     pathinfo: true,
     path: path.join(__dirname, '../build'),
@@ -51,6 +50,7 @@ export default {
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurenceOrderPlugin()
   ],
+
   postcss: webpack => ([
     postcssImport({
       addDependencyTo: webpack
