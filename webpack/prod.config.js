@@ -1,8 +1,10 @@
-import merge from 'lodash/object/merge';
-import webpack from 'webpack';
-import ExtractTextPlugin from 'extract-text-webpack-plugin';
-import webpackTargetElectronRenderer from 'webpack-target-electron-renderer';
-import * as baseConfig from './config';
+'use strict';
+
+const merge = require('lodash/object/merge');
+const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const webpackTargetElectronRenderer = require('webpack-target-electron-renderer');
+const baseConfig = require('./config');
 
 const config = merge({}, baseConfig, {
   devtool: 'source-map',
@@ -32,4 +34,4 @@ const config = merge({}, baseConfig, {
 
 config.target = webpackTargetElectronRenderer(config);
 
-export default config;
+module.exports = config;

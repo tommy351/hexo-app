@@ -1,10 +1,12 @@
-import path from 'path';
-import webpack from 'webpack';
-import postcssImport from 'postcss-import';
-import precss from 'precss';
-import cssnano from 'cssnano';
+'use strict';
 
-export default {
+const path = require('path');
+const webpack = require('webpack');
+const postcssImport = require('postcss-import');
+const precss = require('precss');
+const cssnano = require('cssnano');
+
+module.exports = {
   entry: {
     main: [
       'babel-core/polyfill',
@@ -51,14 +53,17 @@ export default {
     new webpack.optimize.OccurenceOrderPlugin()
   ],
 
-  postcss: webpack => ([
-    postcssImport({
-      addDependencyTo: webpack
-    }),
-    precss(),
-    cssnano({
-      zindex: false
-    })
-  ]),
+  postcss: function(webpack) {
+    return [
+      postcssImport({
+        addDependencyTo: webpack
+      }),
+      precss(),
+      cssnano({
+        zindex: false
+      })
+    ];
+  },
+
   progress: true
 };

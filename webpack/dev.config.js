@@ -1,21 +1,28 @@
-import merge from 'lodash/object/merge';
-import webpack from 'webpack';
-import fs from 'graceful-fs';
-import path from 'path';
-import webpackTargetElectronRenderer from 'webpack-target-electron-renderer';
-import * as baseConfig from './config';
+'use strict';
+
+const merge = require('lodash/object/merge');
+const webpack = require('webpack');
+const fs = require('graceful-fs');
+const path = require('path');
+const webpackTargetElectronRenderer = require('webpack-target-electron-renderer');
+const baseConfig = require('./config');
 
 const babelrc = JSON.parse(fs.readFileSync(path.join(__dirname, '../.babelrc'), 'utf8'));
+const webpackHost = 'localhost';
+const webpackPort = 3000;
 
 const config = merge({}, baseConfig, {
+  webpackHost,
+  webpackPort,
   devtool: 'eval',
   entry: {
     main: [
-      'webpack-hot-middleware/client?path=http://localhost:3000/__webpack_hmr'
+      `webpack-dev-server/client?http://${webpackHost}:${webpackPort}`,
+      'webpack/hot/only-dev-server'
     ].concat(baseConfig.entry.main)
   },
   output: {
-    publicPath: 'http://localhost:3000/build/'
+    publicPath: `http://${webpackHost}:${webpackPort}/build/`
   },
   module: {
     loaders: baseConfig.module.loaders.concat([
@@ -58,4 +65,4 @@ const config = merge({}, baseConfig, {
 
 config.target = webpackTargetElectronRenderer(config);
 
-export default config;
+module.exports = config;

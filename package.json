@@ -7,7 +7,7 @@
     "eslint": "eslint .",
     "jscs": "jscs .",
     "start": "electron .",
-    "dev": "NODE_ENV=development node dev & NODE_ENV=development electron .",
+    "dev": "NODE_ENV=development node webpack/server & NODE_ENV=development electron .",
     "build": "NODE_ENV=production webpack --stats --progress"
   },
   "directories": {
@@ -53,7 +53,6 @@
     "eslint": "^1.8.0",
     "eslint-loader": "^1.1.0",
     "eslint-plugin-react": "^3.8.0",
-    "express": "^4.13.3",
     "extract-text-webpack-plugin": "^0.9.1",
     "file-loader": "^0.8.4",
     "jscs": "^2.5.0",
@@ -71,8 +70,7 @@
     "style-loader": "^0.13.0",
     "url-loader": "^0.5.6",
     "webpack": "^1.12.2",
-    "webpack-dev-middleware": "^1.2.0",
-    "webpack-hot-middleware": "^2.4.1",
+    "webpack-dev-server": "^1.12.1",
     "webpack-target-electron-renderer": "^0.1.1"
   }
 }
