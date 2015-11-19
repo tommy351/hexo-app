@@ -1,15 +1,15 @@
 'use strict';
 
-var app = require('app'); // Module to control application life.
-var path = require('path');
-var BrowserWindow = require('browser-window'); // Module to create native browser window.
+const app = require('app'); // Module to control application life.
+const path = require('path');
+const BrowserWindow = require('browser-window'); // Module to create native browser window.
 
 // Report crashes to our server.
 require('crash-reporter').start();
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
-var mainWindow = null;
+let mainWindow = null;
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function() {
@@ -27,10 +27,11 @@ app.on('ready', function() {
   mainWindow = new BrowserWindow({width: 800, height: 600});
 
   // and load the index.html of the app.
-  mainWindow.loadURL('file://' + path.join(__dirname, 'index.html'));
-
-  // Open the DevTools.
-  mainWindow.webContents.openDevTools();
+  if (process.env.NODE_ENV === 'development') {
+    mainWindow.loadURL('file://' + path.join(__dirname, 'src/html/dev.html'));
+  } else {
+    mainWindow.loadURL('file://' + path.join(__dirname, 'src/html/prod.html'));
+  }
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function() {
